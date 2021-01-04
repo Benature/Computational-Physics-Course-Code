@@ -1,6 +1,6 @@
 # Computational Physics Course 计算物理课程代码
 
-17级练习题（大部分）
+Course in 2020-2021, cover most exercise code.
 
 ---
 
