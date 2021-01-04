@@ -1,0 +1,28 @@
+# 请同学们尝试调整参数nt从小到大,观察你的Hat波是如何扩散开的。
+import numpy  # loading our favorite library
+from matplotlib import pyplot  # and the useful plotting library
+# %matplotlib inline
+
+nx = 41
+dx = 2 / (nx - 1)
+nt = 50  # the number of timesteps we want to calculate
+nu = 0.3  # the value of viscosity
+sigma = .2  # sigma is a parameter, we'll learn more about it later
+dt = sigma * dx**2 / nu  # dt is defined using sigma ... more later!
+
+
+u = numpy.ones(nx)  # a numpy array with nx elements all equal to 1.
+# setting u = 2 between 0.5 and 1 as per our I.C.s
+u[int(.5 / dx):int(1 / dx + 1)] = 2
+
+# our placeholder array, un, to advance the solution in time
+un = numpy.ones(nx)
+
+for n in range(nt):  # iterate through time
+    un = u.copy()  # copy the existing values of u into un
+    for i in range(1, nx - 1):
+        u[i] = un[i] + nu * dt / dx**2 * (un[i+1] - 2 * un[i] + un[i-1])
+
+# 画出计算结果
+pyplot.plot(numpy.linspace(0, 2, nx), u)
+pyplot.show()
